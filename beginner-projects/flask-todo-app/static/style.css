@@ -1,0 +1,48 @@
+body{
+    background:#0F172A;
+}
+
+h1{
+    color:#F8FAFC;
+    font-weight:bold;
+}
+
+.card{
+    background:#1E293B;
+    color:#F8FAFC;
+    border:none;
+    border-radius:12px;
+}
+
+.form-control{
+    background:#334155;
+    color:white;
+    border:none;
+}
+
+.form-control::placeholder{
+    color:#CBD5E1;
+}
+
+.form-control:focus{
+    background:#334155;
+    color:white;
+    box-shadow:none;
+}
+
+.btn-primary{
+    background:#2DD4BF;
+    border:none;
+}
+
+.btn-primary:hover{
+    background:#14B8A6;
+}
+input[type="checkbox"]{
+    width:20px;
+    height:20px;
+    cursor:pointer;
+}
+.flash-message {
+    transition: opacity 0.5s ease;
+}

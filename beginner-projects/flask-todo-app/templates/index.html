@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}My Todo List{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center mb-4">📝 My Todo List</h1>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+     <div class="input-group mb-4">
+        {{ form.title(class="form-control", placeholder="Enter a new task") }}
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+
+<hr>
+
+{% if tasks %}
+
+    {% for task in tasks %}
+
+        <div class="card mb-3">
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+    <div class="d-flex align-items-center">
+
+        <form action="{{ url_for('toggle', task_id=task.id) }}" method="GET">
+            <input
+                type="checkbox"
+                onchange="this.form.submit()"
+                {% if task.completed %}checked{% endif %}
+            >
+        </form>
+
+        {% if task.completed %}
+            <span class="ms-3 text-decoration-line-through">
+                {{ task.title }}
+            </span>
+        {% else %}
+            <span class="ms-3">
+                {{ task.title }}
+            </span>
+        {% endif %}
+
+    </div>
+
+    <a href="{{ url_for('delete', task_id=task.id) }}"
+   class="btn btn-danger btn-sm"
+   onclick="return confirm('Delete this task?')">
+    Delete
+</a>
+
+</div>
+        </div>
+
+    {% endfor %}
+
+{% else %}
+
+
+<p class="text-center text-muted">No tasks yet.</p>
+
+{% endif %}
+
+
+
+{% if total_tasks > 0 %}
+
+<div class="mt-4">
+
+    <h5 class="text-light">
+        Progress: {{ completed_tasks }} / {{ total_tasks }} Tasks Completed
+    </h5>
+
+    <div class="progress">
+
+        <div
+            class="progress-bar bg-success"
+            role="progressbar"
+            style="width: {{ (completed_tasks / total_tasks) * 100 }}%;"
+        >
+            {{ ((completed_tasks / total_tasks) * 100) | round }}%
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
